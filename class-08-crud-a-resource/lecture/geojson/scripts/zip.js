@@ -9,11 +9,15 @@
 
   function createTable() {
     webDB.execute(
-      
+      '',
+       function() {
+         console.log('Successfully set up the articles table.');
+       }
     );
   };
 
   Zip.fetchAll = function() {
+    createTable();
     $.getJSON('/data/manhattan.json', function(data) {
       data.features.map(function(bigDataSet) {
         return bigDataSet.properties;
@@ -30,7 +34,7 @@
     webDB.execute(
       [
         {
-
+          'sql': ';',
           'data': [this.zip, this.neighborhood, this.county]
         }
       ]
